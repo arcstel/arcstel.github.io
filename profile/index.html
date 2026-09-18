@@ -66,7 +66,7 @@
     <header class="p-card p-identity reveal">
       <div class="p-cover"></div>
       <div class="p-identity-body">
-        <div class="p-avatar">WS</div>
+        <div class="p-avatar"><img src="headshot.jpg" alt="William Paul Sindle" /></div>
         <div class="p-identity-info">
           <h1>Will Sindle</h1>
           <div class="p-headline">Identity &amp; Access Management (IAM) Analyst</div>
@@ -273,6 +273,21 @@
   document.getElementById("year").textContent = new Date().getFullYear();
   var t = document.getElementById("navToggle");
   if (t) t.addEventListener("click", function () { document.getElementById("navLinks").classList.toggle("open"); });
+
+  // Reveal animations (page uses .reveal which is opacity:0 until .in is added)
+  (function () {
+    var els = document.querySelectorAll(".reveal");
+    if (!("IntersectionObserver" in window)) {
+      Array.prototype.forEach.call(els, function (el) { el.classList.add("in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.05 });
+    Array.prototype.forEach.call(els, function (el) { io.observe(el); });
+  })();
 </script>
 </body>
 </html>
