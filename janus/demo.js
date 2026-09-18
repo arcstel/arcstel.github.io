@@ -292,7 +292,7 @@
 
   /* --------------------------------------------------------------- banner */
   function banner() {
-    document.title = "Directory Control Center — Interactive Demo";
+    document.title = "Janus Directory Console — Interactive Demo";
     var style = document.createElement("style");
     style.textContent =
       ".demo-banner{position:fixed;left:18px;bottom:18px;z-index:200;display:flex;gap:10px;align-items:center;" +

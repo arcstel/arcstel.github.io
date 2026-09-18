@@ -8,7 +8,7 @@
     "Platforms": ["ServiceNow", "Imprivata", "Voalte Admin Console", "Citrix Workspace", "Infor Lawson (PeopleSoft)", "Microsoft 365 / O365 Admin", "IBM AS400", "Active Directory", "Azure / Entra ID"],
     "Security & Compliance": ["SOX", "HIPAA", "GDPR", "NCQA", "NIST-Aligned Controls", "Risk Management", "Least Privilege"],
     "Scripting & Reporting": ["PowerShell", "SQL Fundamentals", "Excel (Pivot Tables, Lookups)", "Data Analytics & Reporting", "Google Data Analytics", "IBM Cybersecurity Analyst"],
-    "Languages": ["Persian / Farsi — Intermediate", "Russian — Basic"]
+    "Languages": ["Farsi / Persian (Iranian) — Intermediate working proficiency", "Russian — Beginner"]
   };
 
   var EXPERIENCE = [
