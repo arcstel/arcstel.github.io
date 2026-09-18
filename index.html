@@ -178,7 +178,7 @@
       <div class="section-head">
         <div class="kicker">// projects</div>
         <h2>Selected work</h2>
-        <p>The flagship analyzer plus live projects pulled straight from GitHub.</p>
+        <p>Two flagship builds plus live projects pulled straight from GitHub.</p>
       </div>
 
       <div class="card flagship">
@@ -211,6 +211,41 @@
             <div><span style="color:var(--role)">●</span> Reset User Password</div>
             <div style="padding-left:10px;color:var(--dim)">└ grantsAccessTo →</div>
             <div><span style="color:var(--red)">★</span> Active Directory (Tier 0)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card flagship">
+        <div>
+          <span class="badge sev-high">Tooling</span>
+          <h3 style="margin-top:12px;font-size:1.4rem">Directory Control Center</h3>
+          <p class="muted">
+            A browser-based Active Directory management console for Linux — an ADAC-style
+            experience over LDAP/LDAPS against a self-contained Samba AD DC. Create and
+            manage users, groups, and organizational units, reset passwords, move objects,
+            and run identity governance reporting: privileged, dormant, disabled, and
+            non-expiring accounts.
+          </p>
+          <div class="skill-tags" style="margin:14px 0">
+            <span class="chip">Active Directory</span>
+            <span class="chip">LDAPS</span>
+            <span class="chip">Samba AD DC</span>
+            <span class="chip">Identity &amp; Access Management</span>
+            <span class="chip">FastAPI</span>
+            <span class="chip">Docker</span>
+          </div>
+          <a class="btn btn-primary" href="https://github.com/arcstel/directory-console" target="_blank" rel="noopener">View on GitHub ↗</a>
+        </div>
+        <div class="hero-card" style="font-family:var(--mono);font-size:12.5px">
+          <div class="muted" style="margin-bottom:8px">$ docker compose up -d --build</div>
+          <div style="line-height:1.95;color:var(--muted)">
+            <div><span style="color:var(--green)">✓</span> Samba AD DC provisioned</div>
+            <div><span style="color:var(--green)">✓</span> sample directory seeded</div>
+            <div><span style="color:var(--accent)">●</span> console listening on :8000</div>
+            <div style="margin-top:8px;color:var(--dim)">— governance —</div>
+            <div><span style="color:var(--red)">✗</span> privileged identities</div>
+            <div><span style="color:var(--amber)">!</span> disabled &amp; dormant accounts</div>
+            <div><span style="color:var(--accent)">↻</span> non-expiring passwords</div>
           </div>
         </div>
       </div>

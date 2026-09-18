@@ -56,7 +56,7 @@
     },
     {
       role: "Hospital Corpsman (HN) — USS Portsmouth (SSN-707)", company: "U.S. Navy — Veteran", period: "Military Service",
-      bullets: ["Provided operational support in a submarine environment; maintained equipment readiness and division operational tasking."]
+      bullets: ["Crewman and Operations"]
     }
   ];
 
