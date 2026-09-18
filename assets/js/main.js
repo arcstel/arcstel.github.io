@@ -51,12 +51,12 @@
       bullets: ["Practical experience in cybersecurity operations, threat analysis, and risk management frameworks."]
     },
     {
-      role: "Licensed Practical Nurse (LPN) — Healthcare & Clinical", company: "Various Facilities", period: "2008 – 2019",
+      role: "Licensed Practical Nurse (LPN) — Healthcare & Clinical", company: "Various Facilities", period: "2014 – 2020",
       bullets: ["Delivered patient care across hospice, geriatric, LTC, acute, mental health, and correctional settings under NCQA standards."]
     },
     {
       role: "Hospital Corpsman (HN) — USS Portsmouth (SSN-707)", company: "U.S. Navy — Veteran", period: "Military Service",
-      bullets: ["Provided medical care and operational support in a submarine environment."]
+      bullets: ["Provided operational support in a submarine environment; maintained equipment readiness and division operational tasking."]
     }
   ];
 
