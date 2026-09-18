@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Music · W.P. (Will Sindle)</title>
+<meta name="description" content="The W.P. catalog by Will Sindle — six hip hop tracks written and produced by hand in FL Studio. Stream the full catalog in the browser." />
+<meta property="og:title" content="W.P. — Music by Will Sindle" />
+<meta property="og:description" content="Hip hop/rap catalog recorded as W.P. Six tracks, streaming free in the browser." />
+<meta property="og:type" content="music.playlist" />
+<meta property="og:image" content="art/cover.jpg" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23070b12'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' fill='%23a78bfa' font-family='monospace' font-weight='bold'%3EWP%3C/text%3E%3C/svg%3E" />
+</head>
+<body class="app-body">
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../index.html">
+      <span class="mark">WS</span>
+      <span>Will Sindle<small>IAM Analyst</small></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../analyzer/index.html" style="color:var(--accent)">Analyzer ▸</a>
+      <a href="./index.html" style="color:var(--text)">Music</a>
+      <a class="btn btn-sm btn-primary" href="../index.html#contact">Contact</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<main class="music-main">
+  <div class="music-head">
+    <div class="eyebrow">W.P. · Hip Hop / Rap · Brooklyn, NY</div>
+    <h1>The <span class="grad">W.P.</span> catalog</h1>
+    <p>
+      Rap and hip hop recorded as <b>W.P.</b> — the music of Will Sindle. Every track was written
+      and produced by hand in FL Studio. Six songs, streaming free right here.
+    </p>
+    <div class="head-foot">
+      <span class="chip" id="trackCountChip">6 tracks</span>
+      <a class="btn btn-sm" href="../index.html">← Back to portfolio</a>
+      <a class="btn btn-sm" href="https://legacy.reverbnation.com/WP1" target="_blank" rel="noopener">Original ReverbNation page ↗</a>
+    </div>
+  </div>
+
+  <div class="music-layout">
+    <aside class="player-card">
+      <div class="cover-wrap">
+        <span class="cover-badge">W.P.</span>
+        <span class="cover-count" id="coverCount">01 / 06</span>
+        <img src="art/cover.jpg" alt="W.P. cover art" id="coverImg" />
+      </div>
+
+      <div class="np">
+        <div class="np-label mono">Now playing</div>
+        <h2 id="npTitle">music</h2>
+        <div class="np-artist">W.P. <span class="dim">— Will Sindle</span></div>
+      </div>
+
+      <div class="seek">
+        <input type="range" id="seek" min="0" max="1000" step="1" value="0" aria-label="Seek position" />
+        <div class="times"><span id="curTime">0:00</span><span id="durTime">0:00</span></div>
+      </div>
+
+      <div class="controls">
+        <button class="icon-btn" id="shuffleBtn" title="Shuffle" aria-label="Shuffle">
+          <svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+        </button>
+        <button class="icon-btn" id="prevBtn" title="Previous" aria-label="Previous track">
+          <svg viewBox="0 0 24 24"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+        </button>
+        <button class="play-btn" id="playBtn" title="Play" aria-label="Play">
+          <svg viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+        </button>
+        <button class="icon-btn" id="nextBtn" title="Next" aria-label="Next track">
+          <svg viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+        </button>
+        <button class="icon-btn" id="repeatBtn" title="Repeat all" aria-label="Repeat">
+          <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+        </button>
+        <div class="vol">
+          <svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+          <input type="range" id="vol" min="0" max="1" step="0.01" value="0.9" aria-label="Volume" />
+        </div>
+      </div>
+    </aside>
+
+    <section class="playlist-panel">
+      <div class="playlist-head">
+        <div>
+          <div class="kicker">// tracklist</div>
+          <h2>W.P. — Catalog</h2>
+        </div>
+        <span class="chip" id="totalTime">—</span>
+      </div>
+      <ol class="playlist" id="playlist"></ol>
+    </section>
+  </div>
+
+  <div class="music-extra">
+    <div class="card">
+      <div class="kicker">// artist bio</div>
+      <h3>From the original profile</h3>
+      <p class="bio-quote">
+        “25 years old, originally from Far Rockaway, Queens — now residing in Brooklyn.
+        Hip hop/rap artist for the people, by the people. I'm focused on my grind; about to
+        come out with a demo and put my songs on iTunes. I hope my fans enjoy my music —
+        it comes from my heart.”
+      </p>
+    </div>
+    <div class="card">
+      <div class="kicker">// details</div>
+      <h3>Credits</h3>
+      <dl class="meta-grid">
+        <dt>Artist</dt><dd>W.P. / Will Sindle</dd>
+        <dt>Genre</dt><dd>Hip Hop / Rap</dd>
+        <dt>Based in</dt><dd>Brooklyn, NY</dd>
+        <dt>Production</dt><dd>FL Studio</dd>
+        <dt>Tracks</dt><dd id="metaTracks">6</dd>
+        <dt>Runtime</dt><dd id="metaRuntime">—</dd>
+      </dl>
+      <p class="dim" style="font-size:12.5px;margin:14px 0 0">
+        Artwork and music © W.P. / Will Sindle. Streamed directly from this site.
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>© <span id="year"></span> Will Sindle · W.P. music catalog.</span>
+    <span class="mono">Hip Hop / Rap · Brooklyn, NY</span>
+  </div>
+</footer>
+
+<audio id="audio" preload="metadata"></audio>
+<script src="player.js"></script>
+</body>
+</html>
