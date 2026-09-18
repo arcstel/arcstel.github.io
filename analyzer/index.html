@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Identity Attack Path Analyzer · Will Sindle</title>
+<meta name="description" content="Interactive identity governance tool: visualize how identities reach crown-jewel systems and surface dormant, orphaned, over-privileged, and segregation-of-duties conflicts. Synthetic demo data." />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23070b12'/%3E%3Ctext x='50' y='68' font-size='54' text-anchor='middle' fill='%2335d0e0' font-family='monospace' font-weight='bold'%3EIA%3C/text%3E%3C/svg%3E" />
+</head>
+<body class="app-body">
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../index.html">
+      <span class="mark">WS</span>
+      <span>Will Sindle<small>IAM Analyst</small></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="./index.html" style="color:var(--text)">Analyzer</a>
+      <a class="btn btn-sm btn-primary" href="https://github.com/arcstel" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<main class="app-main">
+  <div class="app-head">
+    <div>
+      <h1>Identity Attack Path Analyzer</h1>
+      <p>A graph of synthetic identities, groups, roles, and entitlements. Trace how any identity can reach a crown-jewel system, then interrogate dormant, orphaned, over-privileged, and segregation-of-duties findings. Everything runs client-side on fabricated data.</p>
+    </div>
+    <div style="display:flex;gap:8px">
+      <a class="btn btn-sm" href="../index.html">← Portfolio</a>
+      <a class="btn btn-sm" href="https://github.com/arcstel" target="_blank" rel="noopener">Source</a>
+    </div>
+  </div>
+
+  <div class="stat-strip" id="statStrip"></div>
+
+  <div class="pathbar">
+    <label class="mono muted" style="font-size:12px">TRACE</label>
+    <select id="sourceSelect" aria-label="Source identity"></select>
+    <span class="mono dim">→</span>
+    <select id="targetSelect" aria-label="Target system"></select>
+    <button class="btn btn-sm btn-primary" id="traceBtn">Find path</button>
+    <button class="btn btn-sm" id="simulateBtn" title="Pick a random compromised identity and trace to a critical system">Simulate breach</button>
+    <div class="path-result" id="pathResult"><span class="dim">Select an identity and a target system, then trace the shortest access path.</span></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search"><input type="text" id="searchInput" placeholder="Search identities, roles, groups, systems…" autocomplete="off" /></div>
+    <div class="filter-chips" id="typeChips"></div>
+    <div class="filter-chips" id="sevChips"></div>
+    <span class="spacer"></span>
+    <button class="btn btn-sm btn-ghost" id="resetBtn">Reset</button>
+    <button class="btn btn-sm" id="csvBtn">Export CSV</button>
+    <button class="btn btn-sm" id="jsonBtn">Export JSON</button>
+  </div>
+
+  <div class="app-grid">
+    <div class="graph-card">
+      <svg id="graph" role="img" aria-label="Identity access graph"></svg>
+      <div class="graph-hint mono">drag to pan · scroll to zoom · click a node to inspect</div>
+      <div class="legend">
+        <span><i class="dot" style="background:var(--user)"></i>Identity</span>
+        <span><i class="dot" style="background:var(--group)"></i>Group</span>
+        <span><i class="dot" style="background:var(--role)"></i>Role</span>
+        <span><i class="dot" style="background:var(--ent)"></i>Entitlement</span>
+        <span><i class="dot" style="background:var(--app)"></i>System</span>
+        <span><i class="dot" style="background:var(--amber)"></i>Crown jewel</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="tabs">
+        <button class="tab active" data-tab="findings" id="tabFindings">Findings <span class="badge sev-critical" id="findingCount">0</span></button>
+        <button class="tab" data-tab="inspector" id="tabInspector">Inspector</button>
+      </div>
+      <div class="tab-body">
+        <div id="findingsPane"><div class="finding-list" id="findingList"></div></div>
+        <div id="inspectorPane" class="hidden"><div class="inspector" id="inspector"></div></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="tooltip" id="tooltip"></div>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>© <span id="year"></span> Will Sindle · Synthetic data for demonstration only.</span>
+    <span class="mono">Identity Attack Path Analyzer</span>
+  </div>
+</footer>
+
+<script src="../assets/vendor/d3.v7.min.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/analyzer.js"></script>
+</body>
+</html>
