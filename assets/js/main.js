@@ -78,10 +78,10 @@
 
   var LANG_COLORS = { TypeScript: "#3178c6", JavaScript: "#f1e05a", HTML: "#e34c26", CSS: "#563d7c", Python: "#3572A5", Shell: "#89e051", Rust: "#dea584", Go: "#00ADD8" };
   var FALLBACK_REPOS = [
-    { name: "spiritdeck", description: "Interactive card-deck experience.", language: "TypeScript", stargazers_count: 0, html_url: "https://github.com/arcstel/spiritdeck", updated_at: "" },
-    { name: "Skulley", description: "Interactive map of the 22 bones of the skull.", language: "HTML", stargazers_count: 0, html_url: "https://github.com/arcstel/Skulley", updated_at: "" },
-    { name: "Cranial-nerves", description: "Interactive cranial nerve explorer.", language: "HTML", stargazers_count: 0, html_url: "https://github.com/arcstel/Cranial-nerves", updated_at: "" },
-    { name: "periodic-map", description: "Interactive periodic table.", language: "HTML", stargazers_count: 0, html_url: "https://github.com/arcstel/periodic-map", updated_at: "" }
+    { name: "spiritdeck", description: "Interactive card-deck experience.", language: "TypeScript", stargazers_count: 0, html_url: "https://github.com/arcstel/spiritdeck", has_pages: true, updated_at: "" },
+    { name: "Skulley", description: "Interactive map of the 22 bones of the skull.", language: "HTML", stargazers_count: 0, html_url: "https://github.com/arcstel/Skulley", has_pages: true, updated_at: "" },
+    { name: "Cranial-nerves", description: "Interactive cranial nerve explorer.", language: "HTML", stargazers_count: 0, html_url: "https://github.com/arcstel/Cranial-nerves", has_pages: true, updated_at: "" },
+    { name: "periodic-map", description: "Interactive periodic table.", language: "HTML", stargazers_count: 0, html_url: "https://github.com/arcstel/periodic-map", has_pages: true, updated_at: "" }
   ];
 
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
@@ -168,9 +168,16 @@
   }
 
   /* --------------------------------------------------------------- repos */
+  function pagesUrl(r) {
+    if (r.homepage && /^https?:\/\//i.test(r.homepage)) return r.homepage;
+    if (r.has_pages) return "https://arcstel.github.io/" + encodeURIComponent(r.name) + "/";
+    return "";
+  }
+
   function repoCard(r) {
     var color = LANG_COLORS[r.language] || "#8fa3bd";
     var updated = r.updated_at ? new Date(r.updated_at).toLocaleDateString(undefined, { month: "short", year: "numeric" }) : "";
+    var live = pagesUrl(r);
     var el = document.createElement("div");
     el.className = "card repo";
     el.innerHTML =
@@ -181,7 +188,10 @@
         '<span>★ ' + (r.stargazers_count || 0) + '</span>' +
         (updated ? '<span>updated ' + updated + '</span>' : "") +
       '</div>' +
-      '<a class="btn btn-sm" href="' + esc(r.html_url) + '" target="_blank" rel="noopener">View repo ↗</a>';
+      '<div class="repo-actions">' +
+        (live ? '<a class="btn btn-sm btn-primary" href="' + esc(live) + '" target="_blank" rel="noopener">Live demo ↗</a>' : "") +
+        '<a class="btn btn-sm" href="' + esc(r.html_url) + '" target="_blank" rel="noopener">View repo ↗</a>' +
+      '</div>';
     return el;
   }
 

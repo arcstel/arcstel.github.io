@@ -198,6 +198,7 @@ section { padding: 64px 0; }
 .repo .foot { display: flex; align-items: center; gap: 14px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
 .repo .lang { display: flex; align-items: center; gap: 6px; }
 .repo .lang i { width: 10px; height: 10px; border-radius: 50%; }
+.repo-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 .repo-skeleton { height: 128px; border-radius: var(--radius); background: linear-gradient(100deg, var(--surface) 30%, var(--surface-2) 50%, var(--surface) 70%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border: 1px solid var(--border); }
 @keyframes shimmer { to { background-position: -200% 0; } }
 
