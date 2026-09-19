@@ -1,7 +1,7 @@
 # Topological Field Arithmetic: Foundations, Obstructions, and a Harmonic-Analysis Reframing
 
-**Author:** [Your name]
-**Date:** September 2026
+**Author:** William Paul Sindle
+**Date:** February 2023
 **Status:** Concept paper with a rigorous negative core. Established results are
 cited; the framework's own claims are labeled as conjectures.
 
