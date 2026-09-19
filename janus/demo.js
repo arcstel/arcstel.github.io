@@ -233,6 +233,25 @@
     return { moved: dn, to: targetDn, new_dn: rdn + "," + targetDn };
   }
 
+  function toCsv(rows, fields) {
+    function cell(v) {
+      if (Array.isArray(v)) v = v.join(";");
+      v = v == null ? "" : String(v);
+      return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+    }
+    return fields.join(",") + "\n" + rows.map(function (r) {
+      return fields.map(function (f) { return cell(r[f]); }).join(",");
+    }).join("\n") + "\n";
+  }
+
+  var recycleItems = [
+    {
+      dn: "CN=Former Employee\\0ADEL:11111111-2222-3333-4444-555555555555,CN=Deleted Objects," + BASE,
+      name: "Former Employee", sam: "femployee", whenChanged: "2026-08-01T10:00:00+00:00",
+      lastKnownParent: "OU=People," + BASE, recycled: false
+    }
+  ];
+
   /* -------------------------------------------------------------- routing */
   function route(method, pathname, params, body) {
     var p = pathname.replace(/^\/api/, "");
@@ -248,6 +267,22 @@
       if (p === "/ous") return [200, paginate(ous, params.q || "", +params.page || 1, +params.size || 50, ["name", "description"])];
       if (p === "/computers") return [200, paginate(computers, params.q || "", +params.page || 1, +params.size || 50, ["name", "dns", "os"])];
       if (p === "/object") return [200, getObject(params.dn)];
+      if (p === "/export/users") return [200, toCsv(users, ["sam", "name", "mail", "title", "department", "enabled", "passwordNeverExpires", "lastLogonDays", "memberOf"]), "text/csv"];
+      if (p === "/export/groups") return [200, toCsv(groups, ["sam", "name", "description", "memberCount", "privileged"]), "text/csv"];
+      if (p === "/recycle") return [200, { total: recycleItems.length, items: recycleItems }];
+      if (p === "/object/acl") {
+        return [200, {
+          available: true, dn: params.dn, owner: "Domain Admins", group: "Domain Users", dacl_present: true,
+          aces: [
+            { type: "Allow", flags: ["inherited"], mask: 0xF01FF,
+              rights: ["Create Child / Self", "Delete Child", "List Children", "Self / Validated Write", "Read Property", "Write Property", "Delete", "Read Control"],
+              sid: "S-1-5-11", principal: "Authenticated Users" },
+            { type: "Allow", flags: [], mask: 0xF01FF,
+              rights: ["Create Child / Self", "Delete Child", "List Children", "Read Property"],
+              sid: "S-1-5-21-0", principal: "Tier0-Admins" }
+          ]
+        }];
+      }
     }
 
     if (m === "POST") {
@@ -259,6 +294,21 @@
       if (p === "/actions/member") return [200, groupMember(body.group_dn, body.member_dn, body.add !== false)];
       if (p === "/actions/move") return [200, moveObject(body.dn, body.target_dn)];
       if (p === "/actions/delete") return [200, deleteObject(body.dn)];
+      if (p === "/actions/restore") return [200, { restored: body.dn, to: "OU=People," + BASE }];
+      if (p === "/import/users") {
+        var text = (body && body.csv) || "";
+        var lines = text.split(/\r?\n/).filter(function (l) { return l.trim(); });
+        var header = (lines.shift() || "").split(",");
+        var results = [];
+        lines.forEach(function (line) {
+          var cells = line.split(",");
+          var row = {};
+          header.forEach(function (h, i) { row[h.trim()] = (cells[i] || "").trim(); });
+          try { results.push({ sam: row.sam, ok: true }); createUser(row); }
+          catch (e) { results.push({ sam: row.sam, ok: false, error: e.message }); }
+        });
+        return [200, { created: results.filter(function (r) { return r.ok; }).length, total: results.length, results: results }];
+      }
     }
 
     throw new Error("Demo backend: no route for " + m + " " + pathname);
@@ -278,9 +328,11 @@
 
     try {
       var out = route(init && init.method, parsed.pathname, params, body);
-      return Promise.resolve(new Response(JSON.stringify(out[1]), {
+      var ctype = out[2] || "application/json";
+      var payload = ctype === "application/json" ? JSON.stringify(out[1]) : out[1];
+      return Promise.resolve(new Response(payload, {
         status: out[0],
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": ctype }
       }));
     } catch (e) {
       return Promise.resolve(new Response(JSON.stringify({ detail: e.message }), {
